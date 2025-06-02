@@ -1,39 +1,106 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Cascading Navigation Menu
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+Flutter package to show a left side menu widget with sub-menues.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+---
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+## Platform Support
 
-## Features
+| Platform | Supported |
+|----------|-----------|
+| Windows  | ✅         |
+| Web      | ✅         |
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+---
 
-## Getting started
+## Installation
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Add the dependency to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  cascading_navigation_menu: <latest-version>
+```
+Import the package:
+
+```dart
+import 'package:cascading_navigation_menu/main.dart';
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+Import to your code the main widget:
 
 ```dart
-const like = 'sample';
+import 'package:cascading_navigation_menu/main.dart';
 ```
 
-## Additional information
+Create a list of item and add them:
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+late MenuItems menu;
+...
+menu = MenuItems();
+menu.addNewMenuItem(
+    id: 1,
+    title: "Item 1",
+    leadingIcon: Icons.electric_bike,
+    submenu: false,
+    description: "Item 1",
+    child: const Text("Item 1"),
+);
+```
+
+Then put them in the main widget
+
+```dart
+CascadingMenu(
+    menu: menu,
+    color: Colors.green,
+),
+```
+---
+
+## Elements
+
+### Main element
+
+menu: Attribute that contains the items to show.
+showTitle: Show/hide title of the child in the body, by default true.
+color: Menu´s background color, by default primaryColor.
+fontColor: Font´s color not pressed title, by default black.
+fontColorPressed: Font´s color if items is selected, by default white.
+width: Width size of menu, by default 200px.
+height: Height size of menu childs, by default 40.
+
+```dart
+CascadingMenu({
+  Key? key,
+  required MenuItems menu,
+  bool showTitle = true,
+  Color? color,
+  Color? fontColor,
+  Color? fontColorPressed,
+  double width = 200,
+  double height = 40,
+})
+```
+
+### Menu item
+
+```dart
+MenuItem({
+    required int id,
+    String? title,
+    IconData? leadingIcon,
+    IconData? icon,
+    double? iconSize,
+    bool? submenu,
+    required String description,
+    String? imagen,
+    String? link,
+    List<MenuItem> body = const [],
+    required Widget child,
+    void Function(int?)? onPress,
+})
+```
