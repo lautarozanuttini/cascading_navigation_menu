@@ -69,6 +69,7 @@ class _HomeState extends State<Home> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text("Cascade navigation menu"),
+          backgroundColor: Colors.green,
         ),
         body: CascadingMenu(
           menu: menu,
